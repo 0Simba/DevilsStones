@@ -8,13 +8,8 @@ public class GoToOnClick : MonoBehaviour {
 
 
     void Update() {
-        if (Input.GetMouseButtonDown(0)) {
-            Ray        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask)) {
-                navMeshAgent.SetDestination(hit.point);
-            }
+        if (Input.GetMouseButtonDown(0) && Mouse.isOverFloor) {
+            navMeshAgent.SetDestination(Mouse.floorPosition);
         }
     }
 
