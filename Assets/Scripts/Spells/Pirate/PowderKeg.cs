@@ -3,17 +3,20 @@ using System.Collections;
 
 public class PowderKeg : Spell {
 
-    public GameObject powderKegPrefab;
-    public float      range = 1f;
+    private PowderKegConfig config;
 
+    new protected void Start () {
+        base.Start();
+        config = GeneralConfig.instance.powderKegConfig;
+    }
 
     protected override bool PreTryCast () {
-        return InRangeOfFloorPosition(range);
+        return InRangeOfFloorPosition(config.range);
     }
 
 
     protected override void Cast () {
         base.Cast();
-        Instantiate(powderKegPrefab, Mouse.floorPosition, Quaternion.identity);
+        Instantiate(config.prefab, Mouse.floorPosition, Quaternion.identity);
     }
 }

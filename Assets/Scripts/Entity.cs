@@ -18,11 +18,15 @@ public class Entity : MonoBehaviour {
     [HideInInspector] public    Life           life;
 
 
-    void Start () {
+    void Awake () {
         navMeshAgent   = GetComponent<NavMeshAgent>();
         forcedMovement = GetComponent<ForcedMovement>();
         life           = GetComponent<Life>();
-        SetEntityTag();
+        SetEntityTag();        
+    }
+
+
+    void Start () {
         EventBus.EmitEntitySpawned(this);
     }
 

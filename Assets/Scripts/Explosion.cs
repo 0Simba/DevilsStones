@@ -15,6 +15,13 @@ public class Explosion : MonoBehaviour {
     }
 
 
+    public void Init (float duration, float damage, float range) {
+        this.duration = duration;
+        this.damage   = damage;
+        this.range    = range;
+    }
+
+
     void SetDamages () {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, range, layerMask);
 

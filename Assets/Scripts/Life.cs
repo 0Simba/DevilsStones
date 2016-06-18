@@ -21,6 +21,12 @@ public class Life : MonoBehaviour {
     }
 
 
+    public void SetMax (float max) {
+        this.max = max;
+        current  = max;
+    }
+
+
     public void Lose (float damage) {
         if (isInvincible) {
             return;

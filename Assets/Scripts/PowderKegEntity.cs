@@ -4,25 +4,25 @@ using System.Collections;
 [RequireComponent (typeof (Entity))]
 public class PowderKegEntity : MonoBehaviour {
 
-    public  GameObject explosionPrefab;
-    public  float      lifeLostPerSecond = 1.5f;
-
-    private Entity     entity;
-
-
+    private Entity          entity;
+    private PowderKegConfig config;
 
     void Start () {
+        config = GeneralConfig.instance.powderKegConfig;
+
         entity = GetComponent<Entity>();
         entity.OnDie += Explode;
+        entity.life.SetMax(config.maxLife);
     }
 
 
     void Update () {
-        entity.Hit(lifeLostPerSecond * Time.deltaTime);
+        entity.Hit(config.lifeLostPerSecond * Time.deltaTime);
     }
 
 
     void Explode () {
-        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        GameObject explosion =  Instantiate(config.explosionPrefab, transform.position, Quaternion.identity) as GameObject;
+        explosion.GetComponent<Explosion>().Init(config.explosionDuration, config.explosionDamage, config.explosionRange);
     }
 }
