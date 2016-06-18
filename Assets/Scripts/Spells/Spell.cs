@@ -12,13 +12,13 @@ public abstract class Spell : MonoBehaviour {
     public    float      cantCastValue = 5;
     public    KeyCode    key;
     public    GameObject preview;
-    public    Transform  target;
+    public    Entity     caster;
 
     protected bool       isSelected = false;
 
 
     protected bool EntityOverIsSelf () {
-        return (Mouse.entityOver != null && target == Mouse.entityOver.transform);
+        return (Mouse.entityOver != null && caster == Mouse.entityOver);
     }
 
     protected virtual bool PreTryCast () {
@@ -41,7 +41,7 @@ public abstract class Spell : MonoBehaviour {
             return false;
         }
 
-        return IsPointsClosestThan(target.position, Mouse.floorPosition, range);
+        return IsPointsClosestThan(caster.transform.position, Mouse.floorPosition, range);
     }
 
 
@@ -50,7 +50,7 @@ public abstract class Spell : MonoBehaviour {
             return false;
         }
 
-        return IsPointsClosestThan(target.position, Mouse.entityOver.transform.position, range);
+        return IsPointsClosestThan(caster.transform.position, Mouse.entityOver.transform.position, range);
     }
 
 

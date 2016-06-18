@@ -7,7 +7,7 @@ public class Teleport : Spell {
 
     new protected void Start () {
         base.Start();
-        targetNavMeshAgent = target.GetComponent<NavMeshAgent>();
+        targetNavMeshAgent = caster.GetComponent<NavMeshAgent>();
     }
 
 
@@ -18,7 +18,7 @@ public class Teleport : Spell {
     
     protected override void Cast () {
         base.Cast();
-        target.position = Mouse.floorPosition;
+        caster.transform.position = Mouse.floorPosition;
         targetNavMeshAgent.SetDestination(Mouse.floorPosition);
     }
 }

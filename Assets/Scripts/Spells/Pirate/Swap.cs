@@ -12,7 +12,7 @@ public class Swap : Spell {
 
     new protected void Start () {
         base.Start();
-        targetNavMeshAgent = target.GetComponent<NavMeshAgent>();
+        targetNavMeshAgent = caster.GetComponent<NavMeshAgent>();
     }
 
 
@@ -24,10 +24,10 @@ public class Swap : Spell {
     protected override void Cast () {
         base.Cast();
 
-        Vector3 storedTargetPosition = target.position;
-        target.position                     = Mouse.entityOver.transform.position;
+        Vector3 storedTargetPosition = caster.transform.position;
+        caster.transform.position                     = Mouse.entityOver.transform.position;
         Mouse.entityOver.transform.position = storedTargetPosition;
 
-        targetNavMeshAgent.SetDestination(target.position);
+        targetNavMeshAgent.SetDestination(caster.transform.position);
     }
 }
