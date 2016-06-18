@@ -8,7 +8,7 @@ public class GoToOnClick : MonoBehaviour {
 
 
     void Update() {
-        if (Input.GetMouseButtonDown(0) && Mouse.isOverFloor) {
+        if (Input.GetMouseButton(0) && Mouse.isOverFloor) {
             navMeshAgent.SetDestination(Mouse.floorPosition);
         }
     }

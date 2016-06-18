@@ -8,17 +8,29 @@ public class MainCamera : MonoBehaviour {
     public float     maxZoom;
     public float     zoomSensibility;
     public Vector3   offset;
+    public float     moveMaxSpeed   = 10f;
+    public float     lookAtMaxSpeed = 10f;
 
-    private float currentZoom;
+    private float   currentZoom;
+    private Vector3 lastPosition;
+    private Vector3 hopePosition;
+    private Vector3 lastLookAt;
+    private Vector3 hopeLookAt;
+
+
 
     void Start () {
         offset.Normalize();
         currentZoom = maxZoom;
+
+        SetHopePosition();
+        lastPosition = hopePosition;
     }
 
 
     void Update () {
         CheckScroll();
+        SetHopePosition();
         Replace();
     }
 
@@ -29,9 +41,19 @@ public class MainCamera : MonoBehaviour {
     }
 
 
+    void SetHopePosition () {
+        hopePosition = target.position + offset * currentZoom;
+    }
+
+
     void Replace () {
-        transform.position = target.position + offset * currentZoom;
-        transform.LookAt(target);
+        transform.position = Vector3.MoveTowards(lastPosition, hopePosition, moveMaxSpeed * Time.deltaTime);
+
+        hopeLookAt = Vector3.MoveTowards(lastLookAt, target.position, lookAtMaxSpeed * Time.deltaTime);
+        transform.LookAt(hopeLookAt);
+
+        lastPosition = transform.position;
+        lastLookAt   = hopeLookAt;
     }
 
 }
