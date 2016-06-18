@@ -15,11 +15,20 @@ public class Entity : MonoBehaviour {
 
     [HideInInspector] protected NavMeshAgent   navMeshAgent;
     [HideInInspector] protected ForcedMovement forcedMovement;
+    [HideInInspector] public    Life           life;
+
 
     void Start () {
         navMeshAgent   = GetComponent<NavMeshAgent>();
         forcedMovement = GetComponent<ForcedMovement>();
+        life           = GetComponent<Life>();
         SetEntityTag();
+        EventBus.EmitEntitySpawned(this);
+    }
+
+
+    void OnDestroy () {
+        EventBus.EmitEntityDied(this);
     }
 
 

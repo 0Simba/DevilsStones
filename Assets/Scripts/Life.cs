@@ -5,8 +5,9 @@ public class Life : MonoBehaviour {
 
     [HideInInspector] public float current;
 
-    public  bool   isInvincible;
-    public  float  max = 100;
+    public  bool      isInvincible;
+    public  float     max = 100;
+    public  Transform renderPoint;
 
     private Entity entity;
 
