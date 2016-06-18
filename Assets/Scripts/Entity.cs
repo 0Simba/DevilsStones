@@ -1,9 +1,20 @@
 using UnityEngine;
 using System.Collections;
 
+[RequireComponent (typeof (NavMeshAgent))]
+[RequireComponent (typeof (ForcedMovement))]
 public class Entity : MonoBehaviour {
 
+
+    public delegate void HitMethod (float value);
+    public event HitMethod OnHit;
+
+    [HideInInspector] public NavMeshAgent   navMeshAgent;
+    [HideInInspector] public ForcedMovement forcedMovement;
+
     void Start () {
+        navMeshAgent   = GetComponent<NavMeshAgent>();
+        forcedMovement = GetComponent<ForcedMovement>();
         SetEntityTag();
     }
 
@@ -16,4 +27,19 @@ public class Entity : MonoBehaviour {
         gameObject.layer = LayerMask.NameToLayer("Entity");
     }
 
+
+    public void Hit (float damage) {
+        if (OnHit != null) {
+            OnHit(damage);
+        }
+    }
+
+
+    public void SetDestination (Vector3 position) {
+        if (forcedMovement.isIt) {
+            return;
+        }
+
+        navMeshAgent.SetDestination(position);
+    }
 }
