@@ -17,6 +17,47 @@ public abstract class Spell : MonoBehaviour {
     protected bool       isSelected = false;
 
 
+    protected bool EntityOverIsSelf () {
+        return (Mouse.entityOver != null && target == Mouse.entityOver.transform);
+    }
+
+    protected virtual bool PreTryCast () {
+        return true;
+    }
+
+
+    protected virtual void Cast () {
+        currentTime += castCost;
+    }
+
+
+    protected void Start () {
+        EventBus.overCostSpellCasted += OnOverCostSpellCasted;
+    }
+
+
+    protected bool InRangeOfFloorPosition (float range) {
+        if (!Mouse.isOverFloor) {
+            return false;
+        }
+
+        return IsPointsClosestThan(target.position, Mouse.floorPosition, range);
+    }
+
+
+    protected bool InRangeOfEntityOver (float range) {
+        if (!Mouse.isOverEntity) {
+            return false;
+        }
+
+        return IsPointsClosestThan(target.position, Mouse.entityOver.transform.position, range);
+    }
+
+
+    protected bool IsPointsClosestThan (Vector3 pointA, Vector3 pointB, float distance) {
+        return ((pointA - pointB).magnitude <= distance);
+    }
+
 
     void Update () {
         currentTime = Mathf.Max(currentTime - Time.deltaTime, 0);
@@ -50,21 +91,6 @@ public abstract class Spell : MonoBehaviour {
         if (currentTime >= overCostValue) {
             EventBus.EmitOverCostSpellCasted(castCost);
         }
-    }
-
-
-    protected virtual bool PreTryCast () {
-        return true;
-    }
-
-
-    protected virtual void Cast () {
-        currentTime += castCost;
-    }
-
-
-    protected void Start () {
-        EventBus.overCostSpellCasted += OnOverCostSpellCasted;
     }
 
 

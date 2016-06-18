@@ -8,7 +8,7 @@ public class PowderKeg : Spell {
 
 
     protected override bool PreTryCast () {
-        return SpellHelper.CastedInRange(target.position, range);
+        return InRangeOfFloorPosition(range);
     }
 
 
