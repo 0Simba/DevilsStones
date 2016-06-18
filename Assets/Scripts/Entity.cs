@@ -9,8 +9,8 @@ public class Entity : MonoBehaviour {
     public delegate void HitMethod (float value);
     public event HitMethod OnHit;
 
-    [HideInInspector] public NavMeshAgent   navMeshAgent;
-    [HideInInspector] public ForcedMovement forcedMovement;
+    [HideInInspector] protected NavMeshAgent   navMeshAgent;
+    [HideInInspector] protected ForcedMovement forcedMovement;
 
     void Start () {
         navMeshAgent   = GetComponent<NavMeshAgent>();
@@ -40,6 +40,13 @@ public class Entity : MonoBehaviour {
             return;
         }
 
+        navMeshAgent.Resume();
         navMeshAgent.SetDestination(position);
+    }
+
+
+    public void SetForcedMovement (Vector3 startPosition, Vector3 endPosition, float duration, AnimationCurve curve) {
+        navMeshAgent.Stop();
+        forcedMovement.Set(startPosition, endPosition, duration, curve);
     }
 }

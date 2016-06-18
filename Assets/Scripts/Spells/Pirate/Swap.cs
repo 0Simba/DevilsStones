@@ -24,8 +24,8 @@ public class Swap : Spell {
     protected override void Cast () {
         base.Cast();
 
-        Vector3 storedTargetPosition = caster.transform.position;
-        caster.transform.position                     = Mouse.entityOver.transform.position;
+        Vector3 storedTargetPosition        = caster.transform.position;
+        caster.transform.position           = Mouse.entityOver.transform.position;
         Mouse.entityOver.transform.position = storedTargetPosition;
 
         targetNavMeshAgent.SetDestination(caster.transform.position);

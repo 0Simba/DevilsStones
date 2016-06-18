@@ -12,7 +12,7 @@ public class ForcedMovement : MonoBehaviour {
     private float elapsedTime = 0;
 
 
-    public void ForceMoment(Vector3 startPosition, Vector3 endPosition, float duration, AnimationCurve curve) {
+    public void Set (Vector3 startPosition, Vector3 endPosition, float duration, AnimationCurve curve) {
         this.startPosition = startPosition;
         this.endPosition   = endPosition;
         this.duration      = duration;
