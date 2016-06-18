@@ -5,7 +5,8 @@ public class Teleport : Spell {
 
     public NavMeshAgent targetNavMeshAgent;
 
-    public void Start () {
+    new protected void Start () {
+        base.Start();
         targetNavMeshAgent = target.GetComponent<NavMeshAgent>();
     }
 

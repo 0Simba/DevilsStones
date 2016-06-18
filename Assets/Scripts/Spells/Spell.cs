@@ -7,9 +7,9 @@ public abstract class Spell : MonoBehaviour {
     [HideInInspector] public bool  isSmartCast = true;
 
 
-    public    float      castCost        = 1;
-    public    float      overCostValue   = 2.5f;
-    public    float      surchargedValue = 5;
+    public    float      castCost      = 1;
+    public    float      overCostValue = 2.5f;
+    public    float      cantCastValue = 5;
     public    KeyCode    key;
     public    GameObject preview;
     public    Transform  target;
@@ -41,7 +41,7 @@ public abstract class Spell : MonoBehaviour {
             return;
         }
 
-        if (currentTime >= surchargedValue) {
+        if (currentTime >= cantCastValue) {
             return;
         }
 
@@ -63,7 +63,7 @@ public abstract class Spell : MonoBehaviour {
     }
 
 
-    void Start () {
+    protected void Start () {
         EventBus.overCostSpellCasted += OnOverCostSpellCasted;
     }
 
