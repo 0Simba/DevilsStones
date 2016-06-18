@@ -3,11 +3,15 @@ using System.Collections;
 
 [RequireComponent (typeof (NavMeshAgent))]
 [RequireComponent (typeof (ForcedMovement))]
+[RequireComponent (typeof (Life))]
 public class Entity : MonoBehaviour {
 
 
     public delegate void HitMethod (float value);
+    public delegate void DieMethod ();
     public event HitMethod OnHit;
+    public event DieMethod OnDie;
+
 
     [HideInInspector] protected NavMeshAgent   navMeshAgent;
     [HideInInspector] protected ForcedMovement forcedMovement;
@@ -32,6 +36,15 @@ public class Entity : MonoBehaviour {
         if (OnHit != null) {
             OnHit(damage);
         }
+    }
+
+
+    public void Kill () {
+        if (OnDie != null) {
+            OnDie();
+        }
+
+        Destroy(gameObject);
     }
 
 
