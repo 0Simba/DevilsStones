@@ -5,7 +5,7 @@ public class BigPistolShoot : Spell {
 
     public GameObject     bulletPrefab;
     public Transform      spawnPoint;
-    public int            damage;
+    public float          damage;
     public float          shotBackDistance;
     public AnimationCurve shotBackCurve;
     public float          shotBackDuration;
