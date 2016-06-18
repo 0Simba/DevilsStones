@@ -1,8 +1,6 @@
 using UnityEngine;
 using System.Collections;
 
-public class WorldHUD : MonoBehaviour {
-
-
+public class EnemySpawner : MonoBehaviour {
 
 }

@@ -86,11 +86,12 @@ public abstract class Spell : MonoBehaviour {
             return;
         }
 
-        Cast();
 
         if (currentTime >= overCostValue) {
             EventBus.EmitOverCostSpellCasted(castCost);
         }
+
+        Cast();
     }
 
 

@@ -20,7 +20,7 @@ public class WorldLifeBarHUD : MonoBehaviour {
     public GameObject lifeBarPrefab;
 
 
-    void Start () {
+    void Awake () {
         list = new List<WorldLifeBar>();
         EventBus.entitySpawned += AddLifeBar;
         EventBus.entityDied    += RemoveLifeBar;

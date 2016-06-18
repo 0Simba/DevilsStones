@@ -25,5 +25,7 @@ public class Bullet : MonoBehaviour {
 
         Entity entity = other.gameObject.GetComponent<Entity>();
         entity.Hit(damage);
+
+        Destroy(gameObject);
     }
 }
