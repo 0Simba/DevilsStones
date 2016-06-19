@@ -18,10 +18,7 @@ public class BigPistolShoot : Spell {
 
         caster.transform.LookAt(Mouse.floorPosition);
 
-        GameObject bullet = Instantiate(config.bulletPrefab, spawnPoint.position, caster.transform.rotation) as GameObject;
-
-        bullet.GetComponent<Bullet>().Init(config.bulletSpeed, config.bulletLifeTime, config.bulletDamage);
-
+        caster.Shoot(config.shoot, spawnPoint.position);
         SetShotBack();
     }
 

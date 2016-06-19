@@ -26,7 +26,7 @@ public class Entity : MonoBehaviour {
     }
 
 
-    void Start () {
+    protected void Start () {
         EventBus.EmitEntitySpawned(this);
     }
 

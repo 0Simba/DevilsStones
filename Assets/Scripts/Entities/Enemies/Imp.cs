@@ -5,16 +5,15 @@ public class Imp : Entity {
 
     public Transform  spawnBulletPoint;
 
-    private Entity    entity;
     private Entity    player;
     private float     attackElapsedTime;
     private ImpConfig config;
 
 
 
-    void Start () {
+    new protected void Start () {
+        base.Start();
         player = Player.instance.gameObject.GetComponent<Entity>();
-        entity = GetComponent<Entity>();
         config = GeneralConfig.instance.impConfig;
     }
 
@@ -64,7 +63,7 @@ public class Imp : Entity {
 
 
     public void GoTo (Vector3 targetPoint) {
-        entity.SetDestination(targetPoint);
+        SetDestination(targetPoint);
         transform.LookAt(targetPoint);
     }
 
