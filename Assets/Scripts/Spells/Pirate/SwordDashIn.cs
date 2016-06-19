@@ -35,7 +35,6 @@ public class SwordDashIn : Spell {
 
 
     public void Deactivate (bool interupted) {
-        Debug.Log("peon");
         sword.SetActive(false);
     } 
 }

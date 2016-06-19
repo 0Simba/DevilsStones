@@ -16,7 +16,6 @@ public class AreaDamage : MonoBehaviour {
             return;
         }
 
-
         Entity entity = other.gameObject.GetComponent<Entity>();
         entity.Burn(damagePerSeconds);
     }

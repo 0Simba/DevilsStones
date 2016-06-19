@@ -1,10 +1,18 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
 
 [RequireComponent (typeof (NavMeshAgent))]
 [RequireComponent (typeof (ForcedMovement))]
 [RequireComponent (typeof (Life))]
 public class Entity : MonoBehaviour {
+
+
+    public enum Camp {
+        demon,
+        human
+    }
 
 
     public delegate void HitMethod (float value);
@@ -18,11 +26,13 @@ public class Entity : MonoBehaviour {
     [HideInInspector] public    Life           life;
 
 
+    public Camp camp;
+
     void Awake () {
         navMeshAgent   = GetComponent<NavMeshAgent>();
         forcedMovement = GetComponent<ForcedMovement>();
         life           = GetComponent<Life>();
-        SetEntityTag();        
+        SetEntityTag();
     }
 
 
@@ -53,7 +63,9 @@ public class Entity : MonoBehaviour {
 
 
     public void Burn (float damagePerSeconds) {
-        life.Lose(damagePerSeconds * Time.deltaTime);
+        float damage = damagePerSeconds * Time.deltaTime;
+        Debug.Log("burn " + damage.ToString());
+        life.Lose(damage);
     }
 
 
@@ -88,5 +100,10 @@ public class Entity : MonoBehaviour {
         Bullet bulletScript = bullet.GetComponent<Bullet>();
 
         bulletScript.Init(config.speed, config.lifeTime, config.damage);
+    }
+
+
+    public virtual void HeavyUpdate () {
+
     }
 }
