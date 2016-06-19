@@ -10,7 +10,7 @@ public class GeneralConfig : MonoBehaviour {
     public SwapConfig          swapConfig;
     public SwordDashInConfig   swordDashInConfig;
 
-    
+    public ImpConfig           impConfig;
 
     void Start () {
         instance = this;

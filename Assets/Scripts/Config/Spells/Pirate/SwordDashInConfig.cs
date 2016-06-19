@@ -10,14 +10,14 @@ using System.Collections.Generic;
 public class SwordDashInConfig : ScriptableObject {
 
 #if UNITY_EDITOR
-    [MenuItem("Assets/Create Config/Spell/Sword Dash In")]
+    [MenuItem("Assets/Create Config/Spell/Pirate/Sword Dash In")]
     private static void CreateSoFile () {
         ScriptableObjectUtility.CreateAsset<SwordDashInConfig>();
     }
 #endif
 
     
-    [Range(1, 1000)]  public float          damage;
+    [Range(1, 9999)]  public float          damagePerSeconds;
     [Range(0.5f, 20)] public float          dashDistance;
     [Range(0.01f, 2)] public float          dashDuration;
                       public AnimationCurve dashCurve;

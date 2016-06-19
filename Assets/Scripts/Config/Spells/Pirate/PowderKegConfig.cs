@@ -10,7 +10,7 @@ using System.Collections.Generic;
 public class PowderKegConfig : ScriptableObject {
 
 #if UNITY_EDITOR
-    [MenuItem("Assets/Create Config/Spell/Powder Keg")]
+    [MenuItem("Assets/Create Config/Spell/Pirate/Powder Keg")]
     private static void CreateSoFile () {
         ScriptableObjectUtility.CreateAsset<PowderKegConfig>();
     }

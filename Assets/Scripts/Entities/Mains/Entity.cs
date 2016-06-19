@@ -52,6 +52,11 @@ public class Entity : MonoBehaviour {
     }
 
 
+    public void Burn (float damagePerSeconds) {
+        life.Lose(damagePerSeconds * Time.deltaTime);
+    }
+
+
     public void Kill () {
         if (OnDie != null) {
             OnDie();
@@ -71,8 +76,17 @@ public class Entity : MonoBehaviour {
     }
 
 
-    public void SetForcedMovement (Vector3 startPosition, Vector3 endPosition, float duration, AnimationCurve curve) {
+    public void SetForcedMovement (Vector3 startPosition, Vector3 endPosition, float duration, AnimationCurve curve, ForcedMovement.BoolCallback callback = null) {
         navMeshAgent.Stop();
-        forcedMovement.Set(startPosition, endPosition, duration, curve);
+        forcedMovement.Set(startPosition, endPosition, duration, curve, callback);
+    }
+
+
+    public void Shoot (ShootConfig config, Vector3 spawnPoint) {
+        GameObject bullet = Instantiate(config.prefab, spawnPoint,transform.rotation) as GameObject;
+
+        Bullet bulletScript = bullet.GetComponent<Bullet>();
+
+        bulletScript.Init(config.speed, config.lifeTime, config.damage);
     }
 }

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 public class SwapConfig : ScriptableObject {
 
 #if UNITY_EDITOR
-    [MenuItem("Assets/Create Config/Spell/Swap")]
+    [MenuItem("Assets/Create Config/Spell/Pirate/Swap")]
     private static void CreateSoFile () {
         ScriptableObjectUtility.CreateAsset<SwapConfig>();
     }

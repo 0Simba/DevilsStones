@@ -1,22 +1,21 @@
 using UnityEngine;
 using System.Collections;
 
-[RequireComponent (typeof (Entity))]
-public class Imp : MonoBehaviour {
+public class Imp : Entity {
 
-    public float      runAwayDistance  = 3;
-    public float      approachDistance = 10;
-    public float      attackFrequency  = 1f;
-    public GameObject bullet;
     public Transform  spawnBulletPoint;
 
-    private Entity entity;
-    private Entity player;
-    private float  attackElapsedTime;
+    private Entity    entity;
+    private Entity    player;
+    private float     attackElapsedTime;
+    private ImpConfig config;
+
+
 
     void Start () {
         player = Player.instance.gameObject.GetComponent<Entity>();
         entity = GetComponent<Entity>();
+        config = GeneralConfig.instance.impConfig;
     }
 
 
@@ -29,10 +28,10 @@ public class Imp : MonoBehaviour {
     void Move () {
         float playerDistance = (player.transform.position - transform.position).magnitude;
 
-        if (playerDistance < runAwayDistance) {
+        if (playerDistance < config.runAwayDistance) {
             RunAway();
         }
-        else if (playerDistance > approachDistance) {
+        else if (playerDistance > config.approachDistance) {
             Approach();
         }
         else {
@@ -57,17 +56,11 @@ public class Imp : MonoBehaviour {
     public void Attack () {
         transform.LookAt(player.transform.position);
 
-        if (attackElapsedTime > attackFrequency) {
+        if (attackElapsedTime > config.attackFrequency) {
             attackElapsedTime = 0;
-            Shoot();
+            Shoot(config.shoot, spawnBulletPoint.position);
         }
     }
-
-
-    public void Shoot () {
-        Instantiate(bullet, spawnBulletPoint.position, transform.rotation);
-    }
-
 
 
     public void GoTo (Vector3 targetPoint) {

@@ -1,3 +1,6 @@
+/[Aa]ssets/Ignore/*
+/[Aa]ssets/Ignore.meta
+
 ## Ignore Unity temporary files, build results
 
 /[Ll]ibrary/
