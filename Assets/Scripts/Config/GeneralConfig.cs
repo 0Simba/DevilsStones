@@ -7,6 +7,7 @@ public class GeneralConfig : MonoBehaviour {
 
     public BigPistolShotConfig bigPistolShotConfig;
     public PowderKegConfig     powderKegConfig;
+    public SwapConfig          swapConfig;
 
     
 

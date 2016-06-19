@@ -10,7 +10,7 @@ using System.Collections.Generic;
 public class BigPistolShotConfig : ScriptableObject {
 
 #if UNITY_EDITOR
-    [MenuItem("Assets/Create Config/Spell/BigPistolShot")]
+    [MenuItem("Assets/Create Config/Spell/Big Pistol Shot")]
     private static void CreateSoFile () {
         ScriptableObjectUtility.CreateAsset<BigPistolShotConfig> ();
     }

@@ -3,21 +3,17 @@ using System.Collections;
 
 public class Swap : Spell {
 
-    [HideInInspector] public NavMeshAgent targetNavMeshAgent;
 
-    public float range = 10f;
-
-
-
+    private SwapConfig config;
 
     new protected void Start () {
         base.Start();
-        targetNavMeshAgent = caster.GetComponent<NavMeshAgent>();
+        config = GeneralConfig.instance.swapConfig;
     }
 
 
     protected override bool PreTryCast () {
-        return (!EntityOverIsSelf() && InRangeOfEntityOver(range));
+        return (!EntityOverIsSelf() && InRangeOfEntityOver(config.range));
     }
 
     
@@ -28,6 +24,6 @@ public class Swap : Spell {
         caster.transform.position           = Mouse.entityOver.transform.position;
         Mouse.entityOver.transform.position = storedTargetPosition;
 
-        targetNavMeshAgent.SetDestination(caster.transform.position);
+        caster.SetDestination(caster.transform.position);
     }
 }
