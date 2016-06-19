@@ -5,7 +5,7 @@ public class Imp : Entity {
 
     public Transform  spawnBulletPoint;
 
-    private Entity    player;
+    private Entity    nearestOpponent = null;
     private float     attackElapsedTime;
     private ImpConfig config;
 
@@ -13,7 +13,7 @@ public class Imp : Entity {
 
     new protected void Start () {
         base.Start();
-        player = Player.instance.gameObject.GetComponent<Entity>();
+
         config = GeneralConfig.instance.impConfig;
     }
 
@@ -25,12 +25,17 @@ public class Imp : Entity {
 
 
     void Move () {
-        float playerDistance = (player.transform.position - transform.position).magnitude;
+        if (nearestOpponent == null) {
+            return;
+        }
 
-        if (playerDistance < config.runAwayDistance) {
+
+        float opponentDistance = (nearestOpponent.transform.position - transform.position).magnitude;
+
+        if (opponentDistance < config.runAwayDistance) {
             RunAway();
         }
-        else if (playerDistance > config.approachDistance) {
+        else if (opponentDistance > config.approachDistance) {
             Approach();
         }
         else {
@@ -39,21 +44,21 @@ public class Imp : Entity {
     }
 
     public void RunAway () {
-        Vector3 direction   = (player.transform.position - transform.position).normalized;
+        Vector3 direction   = (nearestOpponent.transform.position - transform.position).normalized;
         Vector3 targetPoint = transform.position + direction * -1;
         GoTo(targetPoint);
     }
 
 
     public void Approach () {
-        Vector3 direction = (player.transform.position - transform.position).normalized;
+        Vector3 direction = (nearestOpponent.transform.position - transform.position).normalized;
         Vector3 targetPoint = transform.position + direction;
         GoTo(targetPoint);
     }
 
 
     public void Attack () {
-        transform.LookAt(player.transform.position);
+        transform.LookAt(nearestOpponent.transform.position);
 
         if (attackElapsedTime > config.attackFrequency) {
             attackElapsedTime = 0;
@@ -67,4 +72,8 @@ public class Imp : Entity {
         transform.LookAt(targetPoint);
     }
 
+
+    override public void HeavyUpdate () {
+        nearestOpponent = EntitiesManager.GetNearestOpponent(this);
+    }
 }

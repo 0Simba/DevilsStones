@@ -11,7 +11,8 @@ public class Entity : MonoBehaviour {
 
     public enum Camp {
         demon,
-        human
+        human,
+        neutral
     }
 
 

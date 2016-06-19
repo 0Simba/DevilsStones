@@ -40,7 +40,7 @@ public class Explosion : MonoBehaviour {
             elapsedTime += Time.deltaTime;
 
             float ratio = Mathf.Min(1, elapsedTime / duration);
-            float size  = ratio * range;
+            float size  = ratio * range * 2;
             transform.localScale = new Vector3(size, size, size);
 
             yield return null;

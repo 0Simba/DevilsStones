@@ -1,23 +1,21 @@
 using UnityEngine;
 using System.Collections;
 
-[RequireComponent (typeof (Entity))]
-public class PowderKegEntity : MonoBehaviour {
+public class PowderKegEntity : Entity {
 
-    private Entity          entity;
     private PowderKegConfig config;
 
-    void Start () {
+    new protected void Start () {
+        base.Start();
         config = GeneralConfig.instance.powderKegConfig;
 
-        entity = GetComponent<Entity>();
-        entity.OnDie += Explode;
-        entity.life.SetMax(config.maxLife);
+        OnDie += Explode;
+        life.SetMax(config.maxLife);
     }
 
 
     void Update () {
-        entity.Hit(config.lifeLostPerSecond * Time.deltaTime);
+        Hit(config.lifeLostPerSecond * Time.deltaTime);
     }
 
 

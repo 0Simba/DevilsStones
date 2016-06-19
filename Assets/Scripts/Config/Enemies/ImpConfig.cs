@@ -20,6 +20,7 @@ public class ImpConfig : ScriptableObject {
     [Range(0, 100)]   public float       runAwayDistance  = 3;
     [Range(0, 100)]   public float       approachDistance = 10;
     [Range(0.1f, 10)] public float       attackFrequency  = 1f;
+    [Range(1, 100)]   public float       visionRadius     = 30f;
                       public ShootConfig shoot;
                       public StatsConfig stats;
 }

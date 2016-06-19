@@ -12,7 +12,7 @@ public class GeneralConfig : MonoBehaviour {
 
     public ImpConfig           impConfig;
 
-    void Start () {
+    void Awake () {
         instance = this;
     }
 }
