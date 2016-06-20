@@ -12,6 +12,10 @@ public class GeneralConfig : MonoBehaviour {
 
     public ImpConfig           impConfig;
 
+    public RoomCreatorConfig   roomCreatorConfig;
+
+
+
     void Awake () {
         instance = this;
     }

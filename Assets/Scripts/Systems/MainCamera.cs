@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MainCamera : MonoBehaviour {
 
-    public Transform target;
+    public Transform target = null;
     public float     minZoom;
     public float     maxZoom;
     public float     zoomSensibility;
@@ -25,10 +25,30 @@ public class MainCamera : MonoBehaviour {
 
         SetHopePosition();
         lastPosition = hopePosition;
+
+        EventBus.playerAdded += SetTargetIsPlayer;
+    }
+
+
+    void OnDestroy () {
+        EventBus.playerAdded -= SetTargetIsPlayer;
+    }
+
+
+    void SetTargetIsPlayer (Entity player) {
+        if (target != null) {
+            return;
+        }
+
+        target = player.transform;
     }
 
 
     void Update () {
+        if (target == null) {
+            return;
+        }
+
         CheckScroll();
         SetHopePosition();
         Replace();
