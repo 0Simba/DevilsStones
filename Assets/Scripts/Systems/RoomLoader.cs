@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections;
 
 public class RoomLoader : MonoBehaviour {
@@ -10,7 +11,6 @@ public class RoomLoader : MonoBehaviour {
 
 
     static public void Load (RoomData data) {
-        config      = GeneralConfig.instance.roomCreatorConfig;
         currentData = data;
 
         instance.AsyncLoad();
@@ -32,8 +32,51 @@ public class RoomLoader : MonoBehaviour {
     =            Instance Part            =
     =====================================*/
 
+    public GameObject[][][] pulling; // [Tile.Type][AppearenceIndex][GameObjectInstance]
+    public int[][]          cursors;
+
+
     void Awake () {
         instance = this;
+    }
+
+
+    void Start () {
+        config = GeneralConfig.instance.roomCreatorConfig;
+        CreatePullingArray();
+    }
+
+
+    void CreatePullingArray () {
+        int tileTypes = Enum.GetNames(typeof(Tile.Type)).Length;
+        pulling = new GameObject[tileTypes][][];
+
+        for (int i = 0; i < tileTypes; ++i) {
+            CreatePullingForTileTypes(i);
+        }
+    }
+
+
+    void CreatePullingForTileTypes (int typeIndex) {
+        int appearences = config.typeToPrefabList[typeIndex].Length;
+
+        pulling[typeIndex] = new GameObject[appearences][];
+
+        int instanceToCreate = config.typeToNumberMax[typeIndex];
+
+        for (int i = 0; i < appearences; i++) {
+            FillOfPrefab(pulling[typeIndex][i], instanceToCreate, config.typeToPrefabList[typeIndex][i]);
+        }
+    }
+
+
+    void FillOfPrefab (GameObject[] array, int number, GameObject prefab) {
+        array = new GameObject[number];
+
+        for (int i = 0; i < number; ++i) {
+            GameObject instanciatedPrefab = GameObject.Instantiate(prefab) as GameObject;
+            array[i] = instanciatedPrefab;
+        }
     }
 
 
