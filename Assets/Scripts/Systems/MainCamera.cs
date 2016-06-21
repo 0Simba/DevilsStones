@@ -18,6 +18,10 @@ public class MainCamera : MonoBehaviour {
     private Vector3 hopeLookAt;
 
 
+    void Awake () {
+        EventBus.playerAdded += SetTargetIsPlayer;
+    }
+
 
     void Start () {
         offset.Normalize();
@@ -25,8 +29,6 @@ public class MainCamera : MonoBehaviour {
 
         SetHopePosition();
         lastPosition = hopePosition;
-
-        EventBus.playerAdded += SetTargetIsPlayer;
     }
 
 

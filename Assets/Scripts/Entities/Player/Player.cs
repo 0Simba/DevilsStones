@@ -4,7 +4,8 @@ using System.Collections;
 
 public class Player : Entity {
 
-    void Awake () {
+    new protected void Awake () {
+        base.Awake();
         gameObject.AddComponent<GoToOnClick>();
     }
 

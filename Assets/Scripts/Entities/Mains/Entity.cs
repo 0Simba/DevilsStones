@@ -29,7 +29,7 @@ public class Entity : MonoBehaviour {
 
     public Camp camp;
 
-    void Awake () {
+    protected void Awake () {
         navMeshAgent   = GetComponent<NavMeshAgent>();
         forcedMovement = GetComponent<ForcedMovement>();
         life           = GetComponent<Life>();
