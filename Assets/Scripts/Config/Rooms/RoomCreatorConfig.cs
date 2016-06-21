@@ -22,9 +22,13 @@ public class RoomCreatorConfig : ScriptableObject {
     public GameObject[] unwalkableTiles;
     public GameObject[] obstacleTiles;
 
-    public NumberRange size;
+    public NumberRange mapSize;
     public NumberRange unwalkable;
     public NumberRange obstacle;
+
+    [Range(1, 10)] public float tileSize;
+
+
 
     public GameObject[][] typeToPrefabList;
     public int[]          typeToNumberMax;
@@ -37,7 +41,7 @@ public class RoomCreatorConfig : ScriptableObject {
 
 
         typeToNumberMax = new int[3];
-        typeToNumberMax[(int) Tile.Type.walkable]   = size.max * size.max - unwalkable.min - obstacle.min;
+        typeToNumberMax[(int) Tile.Type.walkable]   = mapSize.max * mapSize.max - unwalkable.min - obstacle.min;
         typeToNumberMax[(int) Tile.Type.unwalkable] = unwalkable.max;
         typeToNumberMax[(int) Tile.Type.obstacle]   = obstacle.max;
     }

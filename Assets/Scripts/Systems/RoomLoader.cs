@@ -23,7 +23,7 @@ public class RoomLoader : MonoBehaviour {
 
 
     static public Vector3 WorldPosition (int x, int y) {
-        return new Vector3(x - currentData.sizeX / 2, 0, y - currentData.sizeY);
+        return new Vector3(x * config.tileSize - currentData.sizeX * config.tileSize / 2, 0, y * config.tileSize - currentData.sizeY * config.tileSize / 2);
     }
 
 
@@ -61,7 +61,8 @@ public class RoomLoader : MonoBehaviour {
         cursors[(int) tile.type][tile.appearence]++;
 
         target.SetActive(true);
-        target.transform.position = WorldPosition(x, y);
+        target.transform.position   = WorldPosition(x, y);
+        target.transform.localScale = Vector3.one * config.tileSize;
     }
 
 
@@ -103,7 +104,7 @@ public class RoomLoader : MonoBehaviour {
         int instanceToCreate = config.typeToNumberMax[typeIndex];
 
         for (int i = 0; i < appearences; i++) {
-            cursors[typeIndex][i] = 0;
+            cursors[typeIndex][i] = instanceToCreate;
             FillOfPrefab(typeIndex, i, instanceToCreate);
         }
     }

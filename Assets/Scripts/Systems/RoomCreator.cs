@@ -10,8 +10,8 @@ public static class RoomCreator {
         config = GeneralConfig.instance.roomCreatorConfig;
 
 
-        int x = config.size.RandomPick();
-        int y = config.size.RandomPick();
+        int x = config.mapSize.RandomPick();
+        int y = config.mapSize.RandomPick();
 
         RoomData roomData = new RoomData(x, y);
 
