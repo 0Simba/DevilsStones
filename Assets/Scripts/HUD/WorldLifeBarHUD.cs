@@ -35,7 +35,7 @@ public class WorldLifeBarHUD : MonoBehaviour {
 
 
     void AddLifeBar (Entity entity) {
-        if (!entity.life.renderPoint) {
+        if (entity.life.renderPoint == null) {
             return;
         }
 
