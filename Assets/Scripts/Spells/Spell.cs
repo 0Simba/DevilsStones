@@ -13,6 +13,8 @@ public abstract class Spell : MonoBehaviour {
     public    KeyCode    key;
     public    GameObject preview;
     public    Entity     caster;
+    public    int        index = 0;
+
 
     protected bool       isSelected = false;
 
@@ -33,6 +35,7 @@ public abstract class Spell : MonoBehaviour {
 
     protected void Start () {
         EventBus.overCostSpellCasted += OnOverCostSpellCasted;
+        EventBus.EmitSpellAdded(this);
     }
 
 

@@ -11,9 +11,32 @@ public class SpellHUD : MonoBehaviour {
     public Text          cantCastText;
     public Text          currentTimeText;
     public float         imagesHeight = 60f;
+    public int           index;
+
+
+    void Awake () {
+        EventBus.spellAdded += LinkWithLogic;
+    }
+
+
+    void OnDestroy () {
+        EventBus.spellAdded -= LinkWithLogic;
+    }
+
+
+    void LinkWithLogic (Spell spell) {
+        if (this.index == spell.index) {
+            this.spell = spell;
+        }
+    }
 
 
     void Update () {
+        if (spell == null) {
+            return;
+        }
+
+
         UpdateTexts();
         UpdateImages();
     }

@@ -3,7 +3,8 @@ using System.Collections;
 
 public class EventBus : MonoBehaviour {
 
-    public delegate void FloatMethod (float value);
+    public delegate void FloatMethod  (float value);
+    public delegate void SpellMethod  (Spell spell);
     public delegate void EntityMethod (Entity entity);
 
     static public event FloatMethod overCostSpellCasted;
@@ -20,4 +21,8 @@ public class EventBus : MonoBehaviour {
 
     static public event EntityMethod playerAdded;
     static public void EmitPlayerAdded (Entity a) { playerAdded(a); }
+
+
+    static public event SpellMethod spellAdded;
+    static public void EmitSpellAdded (Spell spell) { spellAdded(spell); }
 }
