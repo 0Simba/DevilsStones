@@ -6,11 +6,11 @@ public class RoomLoader : MonoBehaviour {
 
     static public  GameObject        tilesParent;
     static public  RoomCreatorConfig config;
-    static private RoomData          currentData;
+    static private RoomGeography     currentData;
     static private RoomLoader        instance;
 
 
-    static public void Load (RoomData data) {
+    static public void Load (RoomGeography data) {
         currentData = data;
 
         instance.Map();

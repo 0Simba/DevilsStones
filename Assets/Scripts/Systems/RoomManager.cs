@@ -16,7 +16,7 @@ public class RoomManager : MonoBehaviour {
 
 
     void Generate () {
-        RoomData roomData = RoomCreator.CreateOnce();
-        RoomLoader.Load(roomData);
+        RoomGeography roomGeography = RoomGeography.CreateOnce();
+        RoomLoader.Load(roomGeography);
     }
 }

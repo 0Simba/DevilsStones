@@ -17,7 +17,7 @@ public class RoomCreatorConfig : ScriptableObject {
 #endif
 
 
-
+    [Header("Geography")]
     public GameObject[] walkableTiles;
     public GameObject[] unwalkableTiles;
     public GameObject[] obstacleTiles;
@@ -30,8 +30,8 @@ public class RoomCreatorConfig : ScriptableObject {
 
 
 
-    public GameObject[][] typeToPrefabList;
-    public int[]          typeToNumberMax;
+    [HideInInspector] public GameObject[][] typeToPrefabList;
+    [HideInInspector] public int[]          typeToNumberMax;
 
     public void OnEnable () {
         typeToPrefabList = new GameObject[3][];
@@ -46,4 +46,8 @@ public class RoomCreatorConfig : ScriptableObject {
         typeToNumberMax[(int) Tile.Type.obstacle]   = obstacle.max;
     }
 
+
+    [Header("Enemies")]
+    public EnemiesGroupConfig[] enemiesGroup;
+    public NumberRange          challengeTotalPerRoom;
 }
