@@ -17,8 +17,7 @@ public class EnemiesGroupConfig : ScriptableObject {
 #endif
 
 
-    [Range(1, 9999)] public int minDifficulty;
-    [Range(1, 9999)] public int maxDifficulty;
+    public NumberRange difficulty;
 
     [Range(1, 100)]  public int patternChallenge;
 

@@ -5,6 +5,7 @@ public class RoomManager : MonoBehaviour {
 
     void Awake () {
         gameObject.AddComponent<RoomLoader>();
+        gameObject.AddComponent<RoomEnemies>();
     }
 
 
@@ -18,5 +19,6 @@ public class RoomManager : MonoBehaviour {
     void Generate () {
         RoomGeography roomGeography = RoomGeography.CreateOnce();
         RoomLoader.Load(roomGeography);
+        RoomEnemies.CreateOnce();
     }
 }

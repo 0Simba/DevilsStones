@@ -3,8 +3,9 @@ using System.Collections;
 
 public class EventBus : MonoBehaviour {
 
-    public delegate void FloatMethod  (float value);
-    public delegate void SpellMethod  (Spell spell);
+    public delegate void FloatMethod  (float  value);
+    public delegate void IntMethod    (int    value);
+    public delegate void SpellMethod  (Spell  spell);
     public delegate void EntityMethod (Entity entity);
 
     static public event FloatMethod overCostSpellCasted;
@@ -25,4 +26,8 @@ public class EventBus : MonoBehaviour {
 
     static public event SpellMethod spellAdded;
     static public void EmitSpellAdded (Spell spell) { spellAdded(spell); }
+
+
+    static public event IntMethod difficultyChanged;
+    static public void EmitDifficultyChanged (int a) { difficultyChanged(a); }
 }

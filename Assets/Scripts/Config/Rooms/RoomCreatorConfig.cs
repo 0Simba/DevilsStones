@@ -49,5 +49,5 @@ public class RoomCreatorConfig : ScriptableObject {
 
     [Header("Enemies")]
     public EnemiesGroupConfig[] enemiesGroup;
-    public NumberRange          challengeTotalPerRoom;
+    public int                  challengeMinimumPerRoom;
 }
