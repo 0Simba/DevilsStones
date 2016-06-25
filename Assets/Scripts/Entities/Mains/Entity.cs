@@ -6,6 +6,7 @@ using System.Collections.Generic;
 [RequireComponent (typeof (NavMeshAgent))]
 [RequireComponent (typeof (ForcedMovement))]
 [RequireComponent (typeof (Life))]
+[RequireComponent (typeof (Stats))]
 public class Entity : MonoBehaviour {
 
 
@@ -22,23 +23,28 @@ public class Entity : MonoBehaviour {
     public event DieMethod OnDie;
 
 
-    [HideInInspector] protected NavMeshAgent   navMeshAgent;
-    [HideInInspector] protected ForcedMovement forcedMovement;
-    [HideInInspector] public    Life           life;
+    [HideInInspector] public NavMeshAgent   navMeshAgent;
+    [HideInInspector] public ForcedMovement forcedMovement;
+    [HideInInspector] public Life           life;
+    [HideInInspector] public Stats          stats;
 
 
-    public Camp camp;
+    public Camp        camp;
+    public StatsConfig statsConfig;
 
     protected void Awake () {
         navMeshAgent   = GetComponent<NavMeshAgent>();
         forcedMovement = GetComponent<ForcedMovement>();
         life           = GetComponent<Life>();
+        stats          = GetComponent<Stats>();
+
         SetEntityTag();
     }
 
 
     protected void Start () {
         EventBus.EmitEntitySpawned(this);
+        stats.ApplyConfig(statsConfig);
     }
 
 
