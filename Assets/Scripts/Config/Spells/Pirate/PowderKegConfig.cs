@@ -7,7 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public class PowderKegConfig : ScriptableObject {
+public class PowderKegConfig : SpellConfig {
 
 #if UNITY_EDITOR
     [MenuItem("Assets/Create Config/Spell/Pirate/Powder Keg")]

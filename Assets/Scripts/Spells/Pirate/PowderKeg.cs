@@ -8,6 +8,7 @@ public class PowderKeg : Spell {
     new protected void Start () {
         base.Start();
         config = GeneralConfig.instance.powderKegConfig;
+        base.ApplyConfig(config);
     }
 
     protected override bool PreTryCast () {

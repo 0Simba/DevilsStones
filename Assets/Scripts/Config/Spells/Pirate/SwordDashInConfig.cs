@@ -7,7 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public class SwordDashInConfig : ScriptableObject {
+public class SwordDashInConfig : SpellConfig {
 
 #if UNITY_EDITOR
     [MenuItem("Assets/Create Config/Spell/Pirate/Sword Dash In")]

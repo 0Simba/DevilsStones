@@ -10,6 +10,7 @@ public class BigPistolShoot : Spell {
     new protected void Start () {
         base.Start();
         config = GeneralConfig.instance.bigPistolShotConfig;
+        base.ApplyConfig(config);
     }
 
 

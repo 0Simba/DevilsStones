@@ -9,6 +9,7 @@ public class Swap : Spell {
     new protected void Start () {
         base.Start();
         config = GeneralConfig.instance.swapConfig;
+        base.ApplyConfig(config);
     }
 
 

@@ -3,25 +3,28 @@ using System.Collections;
 
 public abstract class Spell : MonoBehaviour {
 
-    [HideInInspector] public float currentTime = 0;
-    [HideInInspector] public bool  isSmartCast = true;
-
-
-    public    float      castCost      = 1;
-    public    float      overCostValue = 2.5f;
-    public    float      cantCastValue = 5;
+    [HideInInspector] public float currentTime   = 0;
+    [HideInInspector] public bool  isSmartCast   = true;
+    [HideInInspector] public float castCost      = 1;
+    [HideInInspector] public float overCostValue = 2.5f;
+    [HideInInspector] public float cantCastValue = 5;
+    [HideInInspector] public float cooldown      = 0.1f;
+    
+    public    bool       defaultAttack = false;
     public    KeyCode    key;
     public    GameObject preview;
     public    Entity     caster;
     public    int        index = 0;
-
-
+    private   float      cooldownRest;
     protected bool       isSelected = false;
+
+
 
 
     protected bool EntityOverIsSelf () {
         return (Mouse.entityOver != null && caster == Mouse.entityOver);
     }
+
 
     protected virtual bool PreTryCast () {
         return true;
@@ -29,13 +32,22 @@ public abstract class Spell : MonoBehaviour {
 
 
     protected virtual void Cast () {
-        currentTime += castCost;
+        cooldownRest  = cooldown;
+        currentTime  += castCost;
     }
 
 
     protected void Start () {
         EventBus.overCostSpellCasted += OnOverCostSpellCasted;
         EventBus.EmitSpellAdded(this);
+    }
+
+
+    protected void ApplyConfig (SpellConfig config) {
+        castCost      = config.castCost;
+        overCostValue = config.overCostValue;
+        cantCastValue = config.cantCastValue;
+        cooldown      = config.cooldown;
     }
 
 
@@ -63,8 +75,10 @@ public abstract class Spell : MonoBehaviour {
 
 
     void Update () {
-        currentTime = Mathf.Max(currentTime - Time.deltaTime, 0);
-        if (Input.GetKeyDown(key)) {
+        currentTime   = Mathf.Max(currentTime - Time.deltaTime, 0);
+        cooldownRest -= Time.deltaTime;
+
+        if (Input.GetKeyDown(key) || defaultAttack && Input.GetMouseButton(1)) {
             SpellKeyPressed();
         }
     }
@@ -81,6 +95,10 @@ public abstract class Spell : MonoBehaviour {
 
 
     void TryCast () {
+        if (cooldownRest > 0) {
+            return;
+        }
+
         if (!PreTryCast()) {
             return;
         }

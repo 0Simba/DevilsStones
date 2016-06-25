@@ -14,6 +14,8 @@ public class SwordDashIn : Spell {
 
         AreaDamage areaDamage       = sword.GetComponent<AreaDamage>();
         areaDamage.damagePerSeconds = config.damagePerSeconds;
+
+        base.ApplyConfig(config);
     }
 
 

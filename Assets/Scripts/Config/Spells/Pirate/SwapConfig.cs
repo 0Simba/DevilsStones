@@ -7,7 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public class SwapConfig : ScriptableObject {
+public class SwapConfig : SpellConfig {
 
 #if UNITY_EDITOR
     [MenuItem("Assets/Create Config/Spell/Pirate/Swap")]

@@ -5,14 +5,25 @@ public class GeneralConfig : MonoBehaviour {
 
     static public GeneralConfig instance;
 
-    public BigPistolShotConfig bigPistolShotConfig;
-    public PowderKegConfig     powderKegConfig;
-    public SwapConfig          swapConfig;
-    public SwordDashInConfig   swordDashInConfig;
+    /*=====  Pirates  ======*/
 
-    public ImpConfig           impConfig;
+    public BigPistolShotConfig     bigPistolShotConfig;
+    public PowderKegConfig         powderKegConfig;
+    public SwapConfig              swapConfig;
+    public SwordDashInConfig       swordDashInConfig;
+    public SimplePistolShootConfig simplePistolShootConfig;
 
-    public RoomCreatorConfig   roomCreatorConfig;
+
+
+    /*=====  Enemies  ======*/
+    
+    public ImpConfig impConfig;
+
+
+
+    /*=====  Rooms  ======*/
+
+    public RoomCreatorConfig roomCreatorConfig;
 
 
 
