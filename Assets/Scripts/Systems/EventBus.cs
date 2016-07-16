@@ -30,4 +30,8 @@ public class EventBus : MonoBehaviour {
 
     static public event IntMethod difficultyChanged;
     static public void EmitDifficultyChanged (int a) { difficultyChanged(a); }
+
+
+    static public event IntMethod roomTeleported;
+    static public void EmitRoomTeleported (int a) { roomTeleported(a); }
 }

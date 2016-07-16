@@ -21,8 +21,9 @@ public class GeneralConfig : MonoBehaviour {
 
 
 
-    /*=====  Rooms  ======*/
+    /*=====  Rooms And Dungeon ======*/
 
+    public DungeonConfig     dungeonConfig;
     public RoomCreatorConfig roomCreatorConfig;
 
 
