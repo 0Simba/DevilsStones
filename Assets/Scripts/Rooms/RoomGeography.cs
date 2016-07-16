@@ -21,6 +21,7 @@ public class RoomGeography {
 
         SetRoomUnwalkable(roomGeography);
         SetRoomObstacles(roomGeography);
+        SetDoor(roomGeography);
 
         return roomGeography;
     }
@@ -30,7 +31,7 @@ public class RoomGeography {
         int unwalkableNumber = config.unwalkable.RandomPick();
 
         for (int i = 0; i < 500 && unwalkableNumber > 0; ++i) {
-            Tile tile = roomGeography.RandomTile();
+            Tile tile = roomGeography.NotBorderRandomTile();
 
             if (ApplyTypeIfItsWalkable(tile, Tile.Type.unwalkable)) {
                 unwalkableNumber--;
@@ -43,7 +44,7 @@ public class RoomGeography {
         int obstacleNumber = config.obstacle.RandomPick();
 
         for (int i = 0; i < 500 && obstacleNumber > 0; ++i) {
-            Tile tile = roomGeography.RandomTile();
+            Tile tile = roomGeography.NotBorderRandomTile();
 
             if (ApplyTypeIfItsWalkable(tile, Tile.Type.obstacle)) {
                 obstacleNumber--;
@@ -51,6 +52,12 @@ public class RoomGeography {
         }
     }
     
+
+    static private void SetDoor (RoomGeography roomGeography) {
+        int y = Random.Range(1, roomGeography.sizeY);
+        roomGeography.tiles[roomGeography.sizeX - 1, y].type = Tile.Type.door;
+    }
+
 
     static private bool ApplyTypeIfItsWalkable (Tile tile, Tile.Type targetType) {
         if (tile.type == Tile.Type.walkable) {
@@ -107,6 +114,14 @@ public class RoomGeography {
     public Tile RandomTile () {
         int x = Random.Range(0, sizeX);
         int y = Random.Range(0, sizeY);
+
+        return tiles[x, y];
+    }
+
+
+    public Tile NotBorderRandomTile () {
+        int x = Random.Range(1, sizeX - 1);
+        int y = Random.Range(1, sizeY - 1);
 
         return tiles[x, y];
     }

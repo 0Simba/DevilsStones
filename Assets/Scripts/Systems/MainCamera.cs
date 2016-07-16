@@ -26,9 +26,6 @@ public class MainCamera : MonoBehaviour {
     void Start () {
         offset.Normalize();
         currentZoom = maxZoom;
-
-        SetHopePosition();
-        lastPosition = hopePosition;
     }
 
 
@@ -43,6 +40,9 @@ public class MainCamera : MonoBehaviour {
         }
 
         target = player.transform;
+
+        SetHopePosition();
+        lastPosition = hopePosition;
     }
 
 

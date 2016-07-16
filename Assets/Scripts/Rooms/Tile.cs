@@ -6,7 +6,8 @@ public class Tile {
     public enum Type {
         walkable,
         unwalkable,
-        obstacle
+        obstacle,
+        door
     }
 
 
