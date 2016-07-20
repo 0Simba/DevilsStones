@@ -18,6 +18,6 @@ public class ShootConfig : ScriptableObject {
 
     [Range(1, 1000)]  public float       damage;
     [Range(1, 1000)]  public float       speed;
-    [Range(1, 1000)]  public float       lifeTime;
+    [Range(0, 1000)]  public float       lifeTime;
                       public GameObject  prefab;
 }
