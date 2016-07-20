@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class Dungeon {
 
-
     public List<Room>    rooms;
     public DungeonConfig config;
     public Vector3       start;
@@ -15,9 +14,9 @@ public class Dungeon {
 
 
     public void Generate () {
+        rooms  = new List<Room>();
         config = GeneralConfig.instance.dungeonConfig;
         floors = config.floorsNumber.Throw();
-
 
         for (int i = 0; i < floors; ++i) {
             GenerateFloor(i);
@@ -66,12 +65,12 @@ public class Dungeon {
 
     public List<Vector3> NeighborsOffsets (int number, Vector3 from) {
         List<Vector3> possibleNeighbors = PossibleNeighbors(from);
+        List<Vector3> neighborsOffsets  = new List<Vector3>();
 
-        List<Vector3> neighborsOffsets = new List<Vector3>();
 
-        for (int i = 0; i < number; ++i) {
+        for (int i = 0; i < number && possibleNeighbors.Count > 0; ++i) {
             int index = Random.Range(0, possibleNeighbors.Count);
-            neighborsOffsets[i] = possibleNeighbors[index];
+            neighborsOffsets.Add(possibleNeighbors[index]);
             possibleNeighbors.RemoveAt(index);
         }
 
@@ -123,5 +122,16 @@ public class Dungeon {
                 placeLadderAtRestToPlace.Add(i);
             }
         }
+    }
+
+
+    public Room GetRoom (Vector3 position) {
+        for (int i = 0; i < rooms.Count; ++i) {
+            if (rooms[i].position == position) {
+                return rooms[i];
+            }
+        }
+
+        return rooms[0];
     }
 }
